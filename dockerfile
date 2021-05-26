@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8082
 
 #Start gateway
-CMD["npm", "start"]
+CMD ["npm", "start"]
