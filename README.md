@@ -1,4 +1,4 @@
-# Gateway API - backend
+# Gateway API - backend ![Gateway](https://github.com/Ohtu-KSDeitti/gateway/actions/workflows/main.yml/badge.svg)
 
 ## Project links
 
