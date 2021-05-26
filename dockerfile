@@ -13,7 +13,7 @@ RUN npm install
 #Dump source code to docker image
 COPY . .
 
-#Open port 8081
+#Open port 8082
 EXPOSE 8082
 
 #Start gateway
