@@ -1,4 +1,11 @@
 node_modules
 .env
-.idea/
 build
+.idea/
+coverage/
+test-coverage/
+
+
+#OS generated files#
+.DS_Store
+.DS_Store?
