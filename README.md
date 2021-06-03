@@ -14,3 +14,4 @@
   - Production
     - AWS link, WIP
     - [Gateway](https://github.com/Ohtu-KSDeitti/gateway)
+    - [User-api](https://github.com/Ohtu-KSDeitti/user-api)
