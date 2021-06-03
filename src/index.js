@@ -4,7 +4,7 @@ const { ApolloGateway } = require('@apollo/gateway')
 require('dotenv').config()
 
 const PORT = process.env.PORT
-const ENV = process.env.ENV
+const ENV = process.env.NODE_ENV
 
 const gateway = new ApolloGateway({
   serviceList: [
@@ -26,10 +26,10 @@ const server = new ApolloServer({
           const query =
         requestContext.request.query?.replace( /\s+/g, ' ' ).trim()
           const variables = JSON.stringify( requestContext.request.variables )
-          console.log('user-api <-', new Date().toISOString())
-          console.log('user-api <-', `- [Request Started] { query: ${ query }`)
-          console.log('user-api <-', 'variables:', variables)
-          console.log('user-api <-',
+          console.log('gateway <-', new Date().toISOString())
+          console.log('gateway <-', `- [Request Started] { query: ${ query }`)
+          console.log('gateway <-', 'variables:', variables)
+          console.log('gateway <-',
             'operationName:',
             requestContext.request.operationName)
           return
