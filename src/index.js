@@ -4,6 +4,7 @@ const { ApolloGateway } = require('@apollo/gateway')
 require('dotenv').config()
 
 const PORT = process.env.PORT
+const ENV = process.env.ENV
 
 const gateway = new ApolloGateway({
   serviceList: [
@@ -18,14 +19,21 @@ const server = new ApolloServer({
   plugins: [
     {
       requestDidStart: (requestContext) => {
-        if (requestContext.request.http?.headers.has('x-apollo-tracing')) {
+        if ( requestContext.request.http?.headers.has( 'x-apollo-tracing' ) ) {
           return
         }
-        const query = requestContext.request.query?.replace(/\s+/g, ' ').trim()
-        const variables = JSON.stringify(requestContext.request.variables)
-        // eslint-disable-next-line max-len
-        console.log('gateway-api <-', new Date().toISOString(), `- [Request Started] { query: ${query}, variables: ${variables}, operationName: ${requestContext.request.operationName} }`)
-        return
+        if (ENV !== 'production') {
+          const query =
+        requestContext.request.query?.replace( /\s+/g, ' ' ).trim()
+          const variables = JSON.stringify( requestContext.request.variables )
+          console.log('user-api <-', new Date().toISOString())
+          console.log('user-api <-', `- [Request Started] { query: ${ query }`)
+          console.log('user-api <-', 'variables:', variables)
+          console.log('user-api <-',
+            'operationName:',
+            requestContext.request.operationName)
+          return
+        }
       },
     },
   ],
