@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: .
-    destination: /home/ec2-user/user-api
+    destination: /home/ec2-user/gateway
 hooks:
   AfterInstall:
     - location: scripts/setup_docker.sh
