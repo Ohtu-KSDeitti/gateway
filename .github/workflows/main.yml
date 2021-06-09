@@ -36,4 +36,15 @@ jobs:
             --deployment-group-name Gateway-api-deployment-group \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+      - name: Deployment status
+        id: status
+        run: |
+          aws deploy get-deployment \
+            --deployment-id "$( OUTPUT="$(aws deploy list-deployments \
+              --application-name user-api-deployer \
+              --deployment-group-name Gateway-api-deployment-group \
+              --query 'deployments' \
+              --max-items 1)" | sed 's/^"\(.*\)".*/\1/' $OUTPUT)" \
+            --query "deploymentInfo.[status]"
+
 
