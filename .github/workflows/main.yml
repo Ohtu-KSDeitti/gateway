@@ -36,17 +36,27 @@ jobs:
             --deployment-group-name Gateway-api-deployment-group \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
-      - name: Deployment status
-        id: status
-        run: |
-          sh
-          aws deploy get-deployment \
-            --deployment-id "$( aws deploy list-deployments \
-              --application-name user-api-deployer \
-              --deployment-group-name Gateway-api-deployment-group \
-              --query 'deployments' \
-              --max-items 1 \
-          | sed 's/^"\(.*\)".*/\1/' )" \
-            --query "deploymentInfo.[status]"
+  - name: Wait until deployment is "Ready"
+      run: |
+        # Try every 15 seconds
+        maxRetries=40
+        retryInterval=15
+        echo "Waiting for the deployment to be ready for testing"
+        retry=0
+        until [ ${retry} -ge ${maxRetries} ]
+        do
+            status=`aws deploy get-deployment --deployment-id ${{ steps.ecs-deployment.outputs.codedeploy-deployment-id }} --region eu-north-1 | jq '.deploymentInfo.status'`
+            echo "::debug::The deployment is currently in the status $status"
+            retry=$[${retry}+1]
+            echo "::debug::Retrying [${retry}/${maxRetries}] in ${retryInterval}(s) "
+            sleep ${retryInterval}
+        done
+
+        if [ ${retry} -ge ${maxRetries} ]; then
+            echo "::warning::Deployment Ready Check Timed Out after ${maxRetries} attempts"
+        fi
+
+
+
 
 
