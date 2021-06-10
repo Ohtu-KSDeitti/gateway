@@ -51,7 +51,7 @@ jobs:
           sleep 2
           if [ $status != "Succeeded" ]; then
             echo "::warning::Deployment unsuccesful, status ${status}"
-
+          fi
 
 
 
