@@ -49,8 +49,8 @@ jobs:
             | grep -oP '"\K[^"\047]+(?=["\047])')" \
             --query "deploymentInfo.[status]" | grep -oP '"\K[^"\047]+(?=["\047])'` \
           sleep 2 \
-          if [ $status != "Succeeded" ]; then \
-            echo "::warning::Deployment unsuccesful, status ${status}" \
+          if [ $status != "Succeeded" ]; then
+            echo "::warning::Deployment unsuccesful, status ${status}"
 
 
 
