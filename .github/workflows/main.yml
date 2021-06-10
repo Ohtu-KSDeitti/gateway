@@ -39,12 +39,14 @@ jobs:
       - name: Deployment status
         id: status
         run: |
+          sh
           aws deploy get-deployment \
-            --deployment-id "$( OUTPUT="$(aws deploy list-deployments \
+            --deployment-id "$( aws deploy list-deployments \
               --application-name user-api-deployer \
               --deployment-group-name Gateway-api-deployment-group \
               --query 'deployments' \
-              --max-items 1)" | sed 's/^"\(.*\)".*/\1/' $OUTPUT)" \
+              --max-items 1 \
+          | sed 's/^"\(.*\)".*/\1/' )" \
             --query "deploymentInfo.[status]"
 
 
