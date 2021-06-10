@@ -50,7 +50,7 @@ jobs:
             --query "deploymentInfo.[status]" | grep -oP '"\K[^"\047]+(?=["\047])'` \
           sleep 2
           if [ "$status" != "Succeeded" ]; then
-            echo "::warning::Deployment unsuccesful, status ${status}"
+            echo "::warning::Deployment unsuccesful, status $status"
           fi
 
 
