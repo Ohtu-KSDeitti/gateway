@@ -39,7 +39,6 @@ jobs:
       - name: Deployment status
         id: status
         run: |
-          sleep 90
           status=`aws deploy get-deployment \
             --deployment-id "$( aws deploy list-deployments \
               --application-name user-api-deployer \
@@ -50,7 +49,7 @@ jobs:
             --query "deploymentInfo.[status]" | grep -oP '"\K[^"\047]+(?=["\047])'`
           sleep 2
           if [ "$status" != "Succeeded" ]; then
-            echo "::warning::Deployment unsuccesful, status $status"
+            echo "::error::Deployment unsuccesful, status $status"
           fi
 
 
