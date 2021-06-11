@@ -39,6 +39,7 @@ jobs:
       - name: Deployment status
         id: status
         run: |
+          # sleep 90
           status=`aws deploy get-deployment \
             --deployment-id "$( aws deploy list-deployments \
               --application-name user-api-deployer \
@@ -50,6 +51,7 @@ jobs:
           sleep 2
           if [ "$status" != "Succeeded" ]; then
             echo "::error::Deployment unsuccesful, status $status"
+            exit 1
           fi
 
 
