@@ -9,6 +9,7 @@ const ENV = process.env.NODE_ENV
 const gateway = new ApolloGateway({
   serviceList: [
     { name: 'user-api', url: process.env.USER_API },
+    { name: 'image-api', url: process.env.IMAGE_API },
   ],
   buildService({ name, url }) {
     return new RemoteGraphQLDataSource({
