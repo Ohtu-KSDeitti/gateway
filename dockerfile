@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json yarn.lock
 
 #Install packages specified in package.json
-RUN yarn
+RUN yarn install
 
 #Dump source code to docker image
 COPY . .
