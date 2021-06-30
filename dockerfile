@@ -9,7 +9,7 @@ COPY package*.json .
 COPY yarn.lock .
 
 #Install packages specified in package.json
-RUN yarn
+RUN yarn install
 
 #Dump source code to docker image
 COPY . .
