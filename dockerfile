@@ -20,8 +20,5 @@ ENV PORT=8081
 EXPOSE 8081
 RUN yarn build
 
-
-FROM node:16-alpine
-
 #Start gateway
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
