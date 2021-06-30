@@ -18,7 +18,6 @@ ENV PORT=8081
 
 #Open port 8081
 EXPOSE 8081
-RUN yarn build
 
 #Start gateway
 CMD ["yarn", "start"]
