@@ -1,14 +1,14 @@
 #Set node16 with alpine linux as the base image for this docker file
-FROM node:16-alpine
+FROM node:16-alpine as dep
 
 #Create directory for app
 WORKDIR /usr/src/app
 
 #Copy package.json and package-lock.json to workdir
-COPY package*.json ./
+COPY package*.json yarn.lock
 
 #Install packages specified in package.json
-RUN npm install
+RUN yarn
 
 #Dump source code to docker image
 COPY . .
@@ -18,6 +18,7 @@ ENV PORT=8081
 
 #Open port 8081
 EXPOSE 8081
+RUN yarn build
 
 #Start gateway
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
